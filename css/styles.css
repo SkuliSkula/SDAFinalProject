@@ -5,6 +5,10 @@ body {
     
 }
 
+.navbar-toggle:focus {
+  outline: none;
+}
+
 .container {
     background-color: #fff;
     box-shadow: 10px 10px 5px #888888;
@@ -79,9 +83,17 @@ body {
 	background: rgba(0,0,0, 0.5);
 	color: #fff;
 }
+
+#menu li.focus {
+outline: none;
+}
 #menu li a{
 	text-decoration:none;
 	color: #000;
+}
+
+#menu li a:focus{
+	text-decoration:none;
 }
 #menu li.active a:hover{
 	color: #000;
@@ -106,4 +118,61 @@ body {
 	width: 100%;
 	padding: 0;
 	margin:0;
+}
+/*************************************************** Screen size attributes ****************************/
+
+@media (max-width:991px) {
+    .container {
+        background-color: #fff;
+        box-shadow: 10px 10px 5px #888888;
+        height: 416px;
+        width: 590px;
+        margin-left: auto;
+        margin-right: auto;  
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        background-color: #fff;
+        box-shadow: 10px 10px 5px #888888;
+        height: 595px;
+        width: 842px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width:668px) {
+    .container {
+        background-color: #fff;
+        box-shadow: 10px 10px 5px #888888;
+        height: 298px;
+        width: 421px;
+        margin-left: auto;
+        margin-right: auto; 
+    }
+}
+
+@media (max-width:640px) {
+    .container {
+        background-color: #fff;
+        box-shadow: 10px 10px 5px #888888;
+        height: 208px;
+        width: 295px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media (max-width:375px) {
+    .container {
+        background-color: #fff;
+        box-shadow: 10px 10px 5px #888888;
+        height: 595px;
+        width: 842px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
