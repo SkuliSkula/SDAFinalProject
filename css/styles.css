@@ -28,21 +28,27 @@ body {
     top: 0;
     left: 0;
     background-image: url("https://raw.githubusercontent.com/SkuliSkula/SDAFinalProject/master/img/IMG_1115551.jpg");
+    background-size: cover;
     width: 100%;
     height: 100%;
     opacity : 0.5;
     z-index: -1;
 }
 
-/*********************************************Pages******************************************************/
+/******************************************** Pages ***********************************************/
 
-#page1 {
-    /*background-image: url("/img/nyc-wallpaper-9.jpg");*/
+#homePage {
+    background-image: url("https://raw.githubusercontent.com/SkuliSkula/SDAFinalProject/master/img/nyc-wallpaper-9.jpg");
+    background-size: cover;
     text-align: center;
     font-size: 48px;
-    color: #000;
+    color: #fff;
     vertical-align: middle;
-    line-height: 595px;
+    line-height: 595px;  
+}
+
+#page1 {
+    background-color: #cccccc;
 }
 
 #page2 {
@@ -51,4 +57,53 @@ body {
 
 #page3 {
     background-color: #cccccc;
+}
+
+#page4 {
+    background-color: #cccccc;
+}
+
+/************************************************ Navigation bar*****************************************/
+
+#menu li {
+	display:inline-block;
+	margin: 10px;
+	color: #000;
+	background:#fff;
+	background: rgba(255,255,255, 0.5);
+	-webkit-border-radius: 10px;
+            border-radius: 10px;
+}
+#menu li.active{
+	background:#666;
+	background: rgba(0,0,0, 0.5);
+	color: #fff;
+}
+#menu li a{
+	text-decoration:none;
+	color: #000;
+}
+#menu li.active a:hover{
+	color: #000;
+}
+#menu li:hover{
+	background: rgba(0,255,255, 0.8);
+}
+#menu li a,
+#menu li.active a{
+	padding: 9px 18px;
+	display:block;
+}
+#menu li.active a{
+	color: #fff;
+}
+#menu{
+	position:fixed;
+	top:0;
+	left:0;
+	height: 40px;
+	z-index: 70;
+	width: 100%;
+	padding: 0;
+	margin:0;
 }

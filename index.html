@@ -28,31 +28,75 @@
 </head>
 
 <body id="main">
+    
+    <!-- Begin Header -->
+    <nav id="menu" class="navbar navbar-fixed-top" role="navigation">
+        <div class="container-fluid">  
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+        </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav" id="menu">
+                <li data-menuanchor="Home" class="active"><a href="#Home">Home</a></li>
+                <li data-menuanchor="firstPage" ><a href="#firstPage">Page 1</a></li>
+                <li data-menuanchor="secondPage"><a href="#secondPage">Page 2</a></li>
+                <li data-menuanchor="thirdPage"><a href="#thirdPage">Page 3</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Header -->
+    
     <div id="fullpage">
+
+        <!-- Begin pages -->
         <div class="section">
-            <div class="container" id="page1">
+            <div class="container" data-anchor="Home" id="homePage">
                 <p>Social Data Analysis Final Project</p> 
             </div>
         </div>
-        
+
         <div class="section">
-            <div class="container" id="page2">
+            <div class="container" data-anchor="firstPage" id="page1">
                 <h1>Page 1 A4 size landscape</h1>
                 <p>Some visualization and text</p>
             </div>
         </div>
-        
+
         <div class="section">
-            <div class="container" id="page3">
+            <div class="container" data-anchor="secondPage" id="page2">
                 <h1>Page 2 A4 size landscape</h1>
                 <p>Some visualization and text</p>
             </div>
         </div>
 
+        <div class="section">
+            <div class="container" data-anchor="thirdPage" id="page3">
+                <h1>Page 3 A4 size landscape</h1>
+                <p>Some visualization and text</p>
+            </div>
+        </div>
+
     </div>
+    
+
+    <!-- End pages -->
     <script>
         $(document).ready(function() {
-            $('#fullpage').fullpage();
+            $('#fullpage').fullpage({
+                anchors: ['Home','firstPage', 'secondPage', 'thirdPage'],
+                navigation: true,
+                navigationPosition: 'right',
+                navigationTooltips: ['Home', 'Page 1', 'Page 2', 'Page 3'],
+                showActiveTooltip: false,
+                menu: '#menu',
+                scrollingSpeed: 700,
+                animateAnchor: true
+            });
         });
     </script>
 </body>
