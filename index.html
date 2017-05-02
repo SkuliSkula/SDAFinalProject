@@ -15,20 +15,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- D3 -->
     <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.0/topojson.js"></script>
     <!-- Full page for smooth scrolling -->
     <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
     <script type="text/javascript" src="scripts/jquery.fullPage.min.js">
     </script>
-    
+    <!-- Google maps  -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/styles.css">
-    <!-- move this into your css file -->
+    <!-- Bubble chart -->
+    <script src="https://phuonghuynh.github.io/js/bower_components/d3-transform/src/d3-transform.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/cafej/src/extarray.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/cafej/src/misc.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/cafej/src/micro-observer.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/microplugin/src/microplugin.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/bubble-chart.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/central-click/central-click.js"></script>
+    <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/lines/lines.js"></script>
 </head>
 
 <body id="main">
-    
     <!-- Begin Header -->
     <nav id="menu" class="navbar navbar-fixed-top" role="navigation">
         <div class="container-fluid">  
@@ -41,64 +50,163 @@
         </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav" id="menu">
-                <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();">Home</a></li>
-                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();">Page 1</a></li>
-                <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Page 2</a></li>
-                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Page 3</a></li>
+                <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();" style="outline:0">Home</a></li>
+                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire station map</a></li>
+                <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Response time</a></li>
+                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Incident numbers</a></li>
+                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Page 4</a></li>
             </ul>
             </div>
         </div>
     </nav>
     <!-- End Header -->
-    
+    <div class="alert alert-danger" id="error">
+        <strong>Error!</strong> This page is only for screens larger than 1024px width!
+    </div>
     <div id="fullpage">
 
         <!-- Begin pages -->
         <div class="section">
             <div class="container" data-anchor="Home" id="homePage">
-                <p>Social Data Analysis Final Project</p> 
+                <h1>San Francisco and it´ s <span style="color:red">firefighters</span></h1>
+                <p><strong>The dataset consists of all <span style="color:red">fire incidents</span> (non-medical) from 2003 to 2016 in San Francisco </strong></p>
+                <p><strong>Total size: 152,7MB, <span style="color:red">428,343</span> rows and 63 columns. <a href="#" target="_blank">Link to dataset</a></strong></p>
+                <p><strong>Data attributes of interests are <span style="color:red">alarm/call time</span> and <span style="color:red">arrival time.</span>
+                </strong></p>
+                <p><strong>Because then it is possible to find out which fire station is the <span style="color:red">quickest</span> to respond at average.</strong></p>
             </div>
         </div>
 
         <div class="section">
             <div class="container" data-anchor="firstPage" id="page1">
-                <h1>Page 1 A4 size landscape</h1>
-                <p>Some visualization and text</p>
+                <h1>Fire stations locations</h1>
+                <p><strong>San Francisco has <span style="color:red">44 fire stations.</span> Which are divided into <span style="color:red">10 battalions.</span></strong></p>
+                <p style="font-size:14px">Click to zoom in</p>
+                <!--<ul class="battalions">
+                    <li>Battalion 1</li>
+                    <li>Battalion 2</li>
+                    <li>Battalion 3</li>
+                    <li>Battalion 4</li>
+                    <li>Battalion 5</li>
+                    <li>Battalion 6</li>
+                    <li>Battalion 7</li>
+                    <li>Battalion 8</li>
+                    <li>Battalion 9</li>
+                    <li>Battalion 10</li>
+                </ul>-->
             </div>
+            
         </div>
-
+        
         <div class="section">
-            <div class="container" data-anchor="secondPage" id="page2">
-                <h1>Page 2 A4 size landscape</h1>
-                <p>Some visualization and text</p>
+            <div class="container bubbleChart" data-anchor="secondPage" id="page2">
             </div>
         </div>
 
         <div class="section">
             <div class="container" data-anchor="thirdPage" id="page3">
-                <h1>Page 3 A4 size landscape</h1>
-                <p>Some visualization and text</p>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" onclick="switchBarChartData('year')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Year
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartData('month')" style="outline:0">
+                        <input value="Year" type="radio" >Month
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartData('weekday')" style="outline:0">
+                        <input value="Year" type="radio" >Day
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartData('hour')" style="outline:0">
+                        <input value="Year" type="radio" >Hour
+                    </label>
+                </div>
             </div>
         </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="fourthPage" id="page4">
+                <h1>Response time check</h1>
+                <p>Type in an address in SF and see time estimation for the firedepartment to arrive</p>
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" id="address-search" placeholder="Enter street name">
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="button" class="btn btn-default" id="btn-address" value="Search" onclick="getLatLong();">
+                      </div>
+                    </div>
+                  </form>
+                <div>
+                    <span class="label label-default" id="showAddress">Address: </span>
+                    <span class="label label-default" id="showLat">Latitude: </span>
+                    <span class="label label-default" id="showLong">Longitude: </span>
+                </div>
+            </div>
+        </div>
+
 
     </div>
     
 
     <!-- End pages -->
     <script>
+        // Show error message if the screen size is to small
+        $(window).resize(function(){
+            var width = $(window).width();
+            if(width < 1024){
+                console.log("show error");
+                $("#error").show();
+            }
+            else{
+                console.log("hide error");
+                $("#error").hide();
+            }
+            })
+        
         $(document).ready(function() {
+            // Load fullpage settings
             $('#fullpage').fullpage({
-                anchors: ['Home','firstPage', 'secondPage', 'thirdPage'],
+                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Home', 'Page 1', 'Page 2', 'Page 3'],
+                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'Page 4'],
                 showActiveTooltip: false,
                 menu: '#menu',
-                scrollingSpeed: 700,
-                animateAnchor: true
+                scrollingSpeed: 2000,
+                animateAnchor: true,
+                onLeave: function(index, nextIndex, direction){
+                    var leavingSection = $(this);
+
+                    //after leaving section 2
+                    if(index == 2 && direction =='down'){
+                        reset();
+                    }
+
+                    else if(index == 2 && direction == 'up'){
+                        reset();
+                    }
+                    
+                    else if(index == 3 && direction == 'down') {
+                    
+                    }
+                }
+                
             });
+            
+            // Load the SanFran Map
+            loadMap();
+            // Load bar chart
+            loadBarChartData();
+            // Load the bubble chart
+            loadBubbleChartData();
         });
+    
     </script>
+    <script src="scripts/sfc-map-auto-zoom.js"></script>
+    <script src="scripts/d3tip.js"></script>
+    <script src="scripts/location-finder.js"></script>
+    <script src="scripts/bar-stats.js"></script>
+    <script src="scripts/bubble-chart.js"></script>
 </body>
 
 </html>

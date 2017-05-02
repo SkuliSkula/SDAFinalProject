@@ -1,0 +1,123 @@
+var width = $("#page1").width();
+var height = $("#page1").height();
+var active = d3.select(null);
+
+var projection = d3.geo.mercator()
+    .scale(130000)
+    .center([-122.4, 37.76]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var map, g;
+
+function loadMap() {
+    
+    d3.json("/data/geodata.geojson", function(error, data) {
+        if (error) {
+           return console.error(error); 
+        }
+        console.log(data);
+        initMap(data);
+        loadFireStationsData();
+    });
+}
+
+function loadFireStationsData() {
+    d3.csv("/data/sffd_fire_stations.csv", function (error, data) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            drawFireStations(data);
+        }
+    });
+}
+
+function initMap(data) {
+    map = d3.select("#page1").append("svg:svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    map.append("rect")
+        .attr("class", "background")
+        .attr("width", width)
+        .attr("height", height)
+        .on("click", reset);
+    
+    sanFran = map.append("g")
+    .style("stroke-width", "1.5px");
+    
+    sanFran.selectAll("path")
+        .data(data.features)
+        .enter().append("path")
+          .attr("d", path)
+          .attr("id", "sanfran")
+          .on("click", clicked);
+}
+    
+function clicked(d) {
+  if (active.node() === this) return reset();
+  active.classed("active", false);
+  active = d3.select(this).classed("active", true);
+
+  var bounds = path.bounds(d),
+      dx = bounds[1][0] - bounds[0][0],
+      dy = bounds[1][1] - bounds[0][1],
+      x = (bounds[0][0] + bounds[1][0]) / 2,
+      y = (bounds[0][1] + bounds[1][1]) / 2,
+      scale = .9 / Math.max(dx / width, dy / height),
+      translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+  sanFran.transition()
+      .duration(750)
+      .style("stroke-width", 1.5 / scale + "px")
+      .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+}
+
+function reset() {
+  active.classed("active", false);
+  active = d3.select(null);
+
+  sanFran.transition()
+      .duration(750)
+      .style("stroke-width", "1.5px")
+      .attr("transform", "");
+}
+
+// Initialize the K data (the small dots)
+function drawFireStations(data) {
+    
+    tip = d3.tip().attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function(d){
+            return "<strong>" + "Address" + ": " + "</strong> <span style='color:red'>" + d.address + "</span>"+ "<br>" +
+                    "<strong>" + "Battalion" + ": " + "</strong> <span style='color:red'>" + d.battalion + "</span>"+ "<br>" +
+                    "<strong>" + "Station" + ": " + "</strong> <span style='color:red'>" + d.station + "</span>"+ "<br>";
+    });
+    
+    sanFran.call(tip);
+    sanFran.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "firestations")
+        .attr("cx", function (d) {
+            return projection([d.longitude, d.latitude])[0];
+        })
+        .attr("cy", function (d) {
+            return projection([d.longitude, d.latitude])[1];
+        })
+        .attr("r", 3)
+        .attr("fill", function(d) {
+            return colorStations((+d.battalion-1));    
+        })
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);;
+}
+
+// Colors for the k data
+function colorStations(color) {
+    var colores_g = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f","#bcbd22", "#17becf"];
+    return colores_g[color];
+}
