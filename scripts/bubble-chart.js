@@ -88,7 +88,7 @@ function initBubbleChart(data) {
                         "font-size": "14px",
                         "font-family": "Source Sans Pro, sans-serif",
                         "text-anchor": "middle",
-                        fill: "white",
+                        fill: "red",
                         display: "none"
                       },
                       attr: {
