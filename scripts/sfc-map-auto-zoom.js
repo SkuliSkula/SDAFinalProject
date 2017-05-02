@@ -13,18 +13,17 @@ var map, g;
 
 function loadMap() {
     
-    d3.json("/data/geodata.geojson", function(error, data) {
+    d3.json("https://gist.githubusercontent.com/SkuliSkula/06cb1f3ca0dc71189c413c5669412ae1/raw/fe4eea101db056946e0b851750f4508ae51ca96d/sanfran.geojson", function(error, data) {
         if (error) {
            return console.error(error); 
         }
-        console.log(data);
         initMap(data);
         loadFireStationsData();
     });
 }
 
 function loadFireStationsData() {
-    d3.csv("/data/sffd_fire_stations.csv", function (error, data) {
+    d3.csv("https://gist.githubusercontent.com/SkuliSkula/e35b0e3a08a045ceba4e7a3462e546c6/raw/f3a663d67ca01d5cf8a8fdecb975d969c5921ae9/sffd_fire_stations.csv", function (error, data) {
         if (error) {
             console.log(error);
         }

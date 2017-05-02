@@ -1,10 +1,9 @@
 
 function loadBubbleChartData() {
-    d3.csv("/data/sffd_battalions_count.csv", function(error, data) {
+    d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/6f22d722b4e55a381b39c440b0cf75fbb0b59ba2/sffd_battalions_count.csv", function(error, data) {
         if(error) {
             return console.error(error);
         }
-        console.log(data);
         initBubbleChart(data);
     });
 }
@@ -15,7 +14,7 @@ function initBubbleChart(data) {
         supportResponsive: true,
         //container: => use @default
         size: h,
-        //viewBoxSize: => use @default
+        viewBoxSize: 1024,
         innerRadius: h / 3.5,
         //outerRadius: => use @default
         radiusMin: 50,
@@ -61,7 +60,7 @@ function initBubbleChart(data) {
                   },
                   attr: {
                     dy: "20px",
-                    dx: "-45px",
+                    dx: "-55px",
                     x: function (d) {return d.cx;},
                     y: function (d) {return d.cy;}
                   }
