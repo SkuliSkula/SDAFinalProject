@@ -1,7 +1,7 @@
 //var width = $("#barchart").width()- margin.left - margin.right;
 //var height = $("#barchart").height() - 200- margin.top - margin.bottom;
 var years, months, days, hours;
-var margin = {top: 10, right: 10, bottom: 35, left: 40},
+var margin = {top: 10, right: 10, bottom: 35, left: 45},
     width = $("#page3").width() - margin.left - margin.right,
     height = 595 - margin.top - margin.bottom;
 var svg, yScale, xScale, x, y, xAxis, yAxis;
