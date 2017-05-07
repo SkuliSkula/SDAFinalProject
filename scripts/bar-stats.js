@@ -141,7 +141,7 @@ function draw(data) {
     
     svg.call(tipBar);
 
-    // THIS IS THE ACTUAL WORK!
+    
     var bars = svg.selectAll(".bar").data(data, function(d) {
       if(d.year)
           return d.year;
@@ -162,7 +162,7 @@ function draw(data) {
     .style('fill-opacity', 1e-6)
     .remove();
 
-    // data that needs DOM = enter() (a set/selection, not an event!)
+    
     bars.enter()
     .append("rect")
     .attr("class", "bar")
