@@ -92,7 +92,7 @@ function drawFireStations(data) {
         .html(function(d){
             return "<strong>" + "Address" + ": " + "</strong> <span style='color:red'>" + d.address + "</span>"+ "<br>" +
                     "<strong>" + "Battalion" + ": " + "</strong> <span style='color:red'>" + d.battalion + "</span>"+ "<br>" +
-                    "<strong>" + "Station" + ": " + "</strong> <span style='color:red'>" + d.station + "</span>"+ "<br>";
+                    "<strong>" + "Station" + ": " + "</strong> <span style='color:red'>" + d.fire_station + "</span>"+ "<br>";
     });
     
     sanFran.call(tip);
