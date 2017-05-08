@@ -37,7 +37,6 @@ function loadBarChartData() {
                             hours = data
 
                             switchBarChartData('year');
-                            console.log(years,months,days,hours);
                         });
                 });
         });

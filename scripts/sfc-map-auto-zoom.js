@@ -109,7 +109,7 @@ function drawFireStations(data) {
         })
         .attr("r", 3)
         .attr("fill", function(d) {
-            return colorStations((+d.battalion-1));    
+            return colorStations((+(d.battalion.slice(1)-1)));    
         })
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide);;
