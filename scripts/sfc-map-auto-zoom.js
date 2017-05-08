@@ -23,7 +23,7 @@ function loadMap() {
 }
 
 function loadFireStationsData() {
-    d3.csv("https://gist.githubusercontent.com/SkuliSkula/e35b0e3a08a045ceba4e7a3462e546c6/raw/f3a663d67ca01d5cf8a8fdecb975d969c5921ae9/sffd_fire_stations.csv", function (error, data) {
+    d3.csv("https://gist.githubusercontent.com/SkuliSkula/e35b0e3a08a045ceba4e7a3462e546c6/raw/a3f221448c9bb32a422b758c2b3415531b01d093/sffd_fire_stations.csv", function (error, data) {
         if (error) {
             console.log(error);
         }
