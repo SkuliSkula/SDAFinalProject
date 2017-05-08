@@ -12,7 +12,6 @@ var path = d3.geo.path()
 var map, g;
 
 function loadMap() {
-    
     d3.json("https://gist.githubusercontent.com/SkuliSkula/06cb1f3ca0dc71189c413c5669412ae1/raw/fe4eea101db056946e0b851750f4508ae51ca96d/sanfran.geojson", function(error, data) {
         if (error) {
            return console.error(error); 

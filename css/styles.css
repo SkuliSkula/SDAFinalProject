@@ -69,12 +69,15 @@ p{
 #page3 {
     font-size: 18px;
     background: rgba(0,0,0,0);
-        outline: none;
+    outline: none;
     box-shadow: none;
 }
 
 #page4 {
     background-color: #cccccc;
+    background: rgba(0,0,0,0);
+    outline: none;
+    box-shadow: none;
 }
 
 .borough {
@@ -206,15 +209,6 @@ p{
   left: 0;
 }
 
-/******************* Address search**************************/
-
-#address-search {
-
-}
-
-#btn-address {
-    outline: 0;
-}
 /******************** Map zoom auto **************************/
 
 .background {
@@ -263,4 +257,29 @@ p{
     fill: none;
 	stroke: #000;
 	shape-rendering: crispEdges;
+}
+/************************* Styles for K-means****/
+
+.kCircle {
+    opacity: 0.75;
+    stroke: none;
+}
+
+.geodistrict {
+    stroke-width: 0.7;
+    stroke: white;
+    fill: steelblue;
+}
+
+.geodistricttext {
+    text-anchor: middle;
+    font-size: 8pt;
+    fill: black;
+    opacity: 0.5;
+}
+
+.geokmeans {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
 }

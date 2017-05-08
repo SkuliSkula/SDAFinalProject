@@ -20,8 +20,6 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
     <script type="text/javascript" src="scripts/jquery.fullPage.min.js">
     </script>
-    <!-- Google maps  -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -54,7 +52,7 @@
                 <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations locations</a></li>
                 <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Battalion stats</a></li>
                 <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Incident numbers</a></li>
-                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Page 4</a></li>
+                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">K-means</a></li>
             </ul>
             </div>
         </div>
@@ -124,27 +122,25 @@
         
         <div class="section">
             <div class="container" data-anchor="fourthPage" id="page4">
-                <h1>Response time check</h1>
-                <p>Type in an address in SF and see time estimation for the firedepartment to arrive</p>
-                  <form class="form-horizontal">
-                    <div class="form-group">
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" id="address-search" placeholder="Enter street name">
-                      </div>
-                      <div class="col-sm-2">
-                        <input type="button" class="btn btn-default" id="btn-address" value="Search" onclick="getLatLong();">
-                      </div>
-                    </div>
-                  </form>
-                <div>
-                    <span class="label label-default" id="showAddress">Address: </span>
-                    <span class="label label-default" id="showLat">Latitude: </span>
-                    <span class="label label-default" id="showLong">Longitude: </span>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >K2
+                    </label>
+                    <label class="btn btn-default" onmouseover="showKData('k3')" style="outline:0">
+                        <input value="Year" type="radio" >K3
+                    </label>
+                    <label class="btn btn-default" onmouseover="showKData('k4')" style="outline:0">
+                        <input value="Year" type="radio" >K4
+                    </label>
+                    <label class="btn btn-default" onmouseover="showKData('k5')" style="outline:0">
+                        <input value="Year" type="radio" >K5
+                    </label>
+                    <label class="btn btn-default" onmouseover="showKData('k6')" style="outline:0">
+                        <input value="Year" type="radio" >K6
+                    </label>
                 </div>
             </div>
         </div>
-
-
     </div>
     
 
@@ -167,7 +163,7 @@
                 anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'Page 4'],
+                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'K-means'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,
@@ -197,14 +193,16 @@
             loadBarChartData();
             // Load the bubble chart
             loadBubbleChartData();
+            // Load the k-means map
+            loadKMeansMap();
         });
     
     </script>
     <script src="scripts/sfc-map-auto-zoom.js"></script>
     <script src="scripts/d3tip.js"></script>
-    <script src="scripts/location-finder.js"></script>
     <script src="scripts/bar-stats.js"></script>
     <script src="scripts/bubble-chart.js"></script>
+    <script src="scripts/k-means.js"></script>
 </body>
 
 </html>
