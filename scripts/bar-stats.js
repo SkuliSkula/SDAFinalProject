@@ -30,7 +30,7 @@ function loadBarChartData() {
                     days = data
 
                         // Load Hours
-                        d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/6f22d722b4e55a381b39c440b0cf75fbb0b59ba2/sffd_hour_count.csv", function(error, data){
+                        d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/e0e7438fb292388dc7693e4a70818eefe3350e0a/sffd_hour_count.csv", function(error, data){
                             if(error) {
                                 return console.error(error)
                             }
