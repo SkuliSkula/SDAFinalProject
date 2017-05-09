@@ -50,9 +50,9 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav" id="menu">
                 <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();" style="outline:0">Information</a></li>
-                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations</a></li>
-                <li data-menuanchor="secondPage" ><a href="#secondPage" onclick="this.blur();" style="outline:0">Fire categories</a></li>
-                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalion</a></li>
+                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire Stations</a></li>
+                <li data-menuanchor="secondPage" ><a href="#secondPage" onclick="this.blur();" style="outline:0">Fire Categories</a></li>
+                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalions</a></li>
                 <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Fire Incidents</a></li>
                 <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean Response Time</a></li>
                 <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean m/s</a></li>
@@ -73,6 +73,7 @@
         <div class="section">
             <div class="container" data-anchor="Home" id="homePage">
                 <h1>SFFD - Fire Incidents</h1>
+                <h4>Please view this in Google Chrome and full HD screen for optimal experience</h4>
                 <p><a href="http://nbviewer.jupyter.org/github/adalstef/social_data_final_project/blob/master/SFFD_incidents.ipynb" target="_blank">Link to the iPython notebook </a><strong> </strong></p>
                 <p><a href="https://data.sfgov.org/Public-Safety/Fire-Incidents/wr8u-xric" target="_blank">Link to the dataset</a><strong> </strong></p>
                 <p><strong>One of the most important aspects of every fire department is the response time, or how quickly a fire department is at arriving on a scene. Every second can be critical. San Francisco's Open Data project has made it possible to find out these response times.</strong></p>
@@ -89,11 +90,11 @@
             </div>
             
         </div>
-        
+         
         <div class="section">
             <div class="container" data-anchor="secondPage" id="page2">
                 <div class="btn-group" data-toggle="buttons">
-                    <p>The total number of fire categories is 176, we will only plot the top 30 categories. In this plot it is very clear that the most number of categories are related to false alarms, six out of the top ten categories. This is not very interesting and we will therefore look into the categories directly linked to fire. Five of these fire categories made it to the top 30 overall categories, which means, as expected, that there are far more false alarms than there are actual fires.</p>
+                    <p>The total number of fire categories is 176, we will only plot the top 30 categories. You can see the name of the categories by hovering over the bars in the chart. In this plot it is very clear that the most number of categories are related to false alarms, six out of the top ten categories. This is not very interesting and we will therefore look into the categories directly linked to fire. Five of these fire categories made it to the top 30 overall categories, which means, as expected, that there are far more false alarms than there are actual fires.</p>
                     <label class="btn btn-default active" onclick="switchBarChartDataCat('all')" style="outline:0">
                         <input value="Year" type="radio" checked="" >All 
                     </label>
@@ -208,7 +209,7 @@
         
         <div class="section">
             <div class="container" data-anchor="ninethPage" id="page9">
-                <p><strong>We will use this classifier to identify clusters in building fires by training models of K = 2, ..., 6. The cluster centers and the labels that belong to them can been seen by clicking the buttons. You can some zoom in on the map by clicking on different regions in San Francisco.</strong></p>
+                <p><strong>We will use this classifier to identify clusters in building fires by training models of K = 2, ..., 6. The cluster centers and the labels that belong to them can be seen by clicking the buttons. You can some zoom in on the map by clicking on different regions in San Francisco.</strong></p>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
                         <input value="Year" type="radio" checked="" >K2
@@ -250,7 +251,7 @@
                 anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage', 'ninethPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Information', 'Fire stations', 'Fire categories', 'Battalion', 'Fire incidents','Mean response time', 'Mean m/s', 'Multiple regression', 'Decision trees', 'k-means'],
+                navigationTooltips: ['Information', 'Fire stations', 'Fire categories', 'Battalions', 'Fire incidents','Mean response time', 'Mean m/s', 'Multiple regression', 'Decision trees', 'k-means'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,

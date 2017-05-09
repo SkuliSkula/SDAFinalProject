@@ -13,12 +13,12 @@ function loadBarChartDataCat() {
         categories_all = data
         initBarChartCat();
         // Load fire gategories
-        d3.csv("https://gist.githubusercontent.com/SkuliSkula/27a5dee0b162e949fd758110109b191f/raw/d21d8c98564e75697b97aab3b6d6e92e13795273/fire_gategories_top10.csv", function(error, data){
+        d3.csv("https://gist.githubusercontent.com/SkuliSkula/27a5dee0b162e949fd758110109b191f/raw/58cdab0a5f3006036c92ded133b6f1af459d31df/fire_gategories_top10.csv", function(error, data){
             if(error) {
                 return console.error(error)
             }
             categories_fire = data
-            switchBarChartDataCat('fire');
+            switchBarChartDataCat('all');
 
         });
     });
@@ -43,9 +43,7 @@ function initBarChartCat() {
         .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
     
-    svgCat.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + (heightCat-100) + ")");
+
     
     svgCat.append("g")
       .attr("class", "y axis")
@@ -96,7 +94,8 @@ function drawCat(data) {
     tipBarBs = d3.tip().attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d){
-        return "<strong>" + "Number of incidents" + ": " + "</strong> <span style='color:red'>" + d.number_of_incidents + "</span>";
+        return "<strong>" + "Number of incidents" + ": " + "</strong> <span style='color:red'>" + d.number_of_incidents + "</span>" + "<br>"+ 
+         "<strong>" + "Category" + ": " + "</strong> <span style='color:red'>" + d.category + "</span>";
     });
     
     svgCat.call(tipBarBs);
@@ -133,7 +132,9 @@ function drawCat(data) {
     })
       .attr("height", function(d) { 
         return heightCat - 100 - yCat(+d.number_of_incidents); 
-    });     
+    });
+    
+    svgCat.selectAll("text:x").attr("transform", "rotate(-90)");
 
 }
 
