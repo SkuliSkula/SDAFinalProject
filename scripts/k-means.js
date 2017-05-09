@@ -1,7 +1,7 @@
 // Declare the global variables
 var svgGEO = undefined;
-var w = $("#page7").width();
-var h = $("#page7").height();
+var w = $("#page9").width();
+var h = $("#page9").height();
 var kData = [];
 var kMeansData = {};
 var active = d3.select(null);
@@ -28,7 +28,7 @@ function loadKMeansMap() {
 }
 
 function initKMap(data) {
-    map = d3.select("#page7").append("svg:svg")
+    map = d3.select("#page9").append("svg:svg")
         .attr("width", width)
         .attr("height", height);
 

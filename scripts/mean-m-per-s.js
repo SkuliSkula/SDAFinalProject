@@ -2,7 +2,7 @@
 //var height = $("#barchart").height() - 200- margin.top - margin.bottom;
 var mmBattalions, mmFireStations, mmHours, mmMonths, mmWeekDays, mmYears;
 var marginMm = {top: 10, right: 10, bottom: 35, left: 45},
-    widthMm = $("#page5").width() - marginMm.left - marginMm.right,
+    widthMm = $("#page6").width() - marginMm.left - marginMm.right,
     heightMm = 595 - marginMm.top - marginMm.bottom;
 var svgMm, yScaleMm, xScaleMm, xMm, yMm, xAxisMm, yAxisMm;
 
@@ -73,7 +73,7 @@ function initMmBarChart() {
         .scale(yMm)
         .orient("left");
 
-    svgMm = d3.select("#page5").append("svg:svg")
+    svgMm = d3.select("#page6").append("svg:svg")
         .attr("width", widthMm + marginMm.left + marginMm.right)
         .attr("height", heightMm + marginMm.top + marginMm.bottom)
         .append("g")
@@ -96,7 +96,7 @@ function initMmBarChart() {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Mean m per s");
+      .text("Mean m/s");
 }
 
 function replayMm(data) {
@@ -148,7 +148,7 @@ function drawMm(data) {
     tipBarMm = d3.tip().attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d){
-        return "<strong>" + "Mean m per s" + ": " + "</strong> <span style='color:red'>" + d.mean_m_per_s + "</span>";
+        return "<strong>" + "Mean m/s" + ": " + "</strong> <span style='color:red'>" + d.mean_m_per_s + "</span>";
     });
     
     svgMm.call(tipBarMm);

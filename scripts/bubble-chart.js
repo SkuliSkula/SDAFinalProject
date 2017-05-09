@@ -1,6 +1,6 @@
 
 function loadBubbleChartData() {
-    d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/6f22d722b4e55a381b39c440b0cf75fbb0b59ba2/sffd_battalions_count.csv", function(error, data) {
+    d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/66286793dcae33d3ca435bd639cde00961deb2af/sffd_battalions_count.csv", function(error, data) {
         if(error) {
             return console.error(error);
         }

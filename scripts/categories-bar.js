@@ -46,11 +46,6 @@ function initBarChartCat() {
     svgCat.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + (heightCat-100) + ")");
-    /*.selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-90)" ); */
     
     svgCat.append("g")
       .attr("class", "y axis")

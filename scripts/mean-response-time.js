@@ -2,7 +2,7 @@
 //var height = $("#barchart").height() - 200- margin.top - margin.bottom;
 var mrtBattalions, mrtFirestations, mrtHours, mrtMonths, mrtWeekDays, mrtYears;
 var marginMrt = {top: 10, right: 10, bottom: 35, left: 45},
-    widthMrt = $("#page6").width() - marginMrt.left - marginMrt.right,
+    widthMrt = $("#page5").width() - marginMrt.left - marginMrt.right,
     heightMrt = 595 - marginMrt.top - marginMrt.bottom;
 var svgMrt, yScaleMrt, xScaleMrt, xMrt, yMrt, xAxisMrt, yAxisMrt;
 
@@ -72,7 +72,7 @@ function initMrtBarChart() {
         .scale(yMrt)
         .orient("left");
 
-    svgMrt = d3.select("#page6").append("svg:svg")
+    svgMrt = d3.select("#page5").append("svg:svg")
         .attr("width", widthMrt + marginMrt.left + marginMrt.right)
         .attr("height", heightMrt + marginMrt.top + marginMrt.bottom)
         .append("g")
@@ -95,11 +95,11 @@ function initMrtBarChart() {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Mean m per s");
+      .text("Mean response time");
 }
 
 function replayMrt(data) {
-
+    console.log(data);
     if(!data) {
         return;
     }
@@ -148,7 +148,7 @@ function drawMrt(data) {
     tipBarMrt = d3.tip().attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d){
-        return "<strong>" + "Mean m per s" + ": " + "</strong> <span style='color:red'>" + d.mean_response_time + "</span>";
+        return "<strong>" + "Mean response time" + ": " + "</strong> <span style='color:red'>" + d.mean_response_time + "</span>";
     });
     
     svgMrt.call(tipBarMrt);

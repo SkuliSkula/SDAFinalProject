@@ -52,13 +52,13 @@
                 <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();" style="outline:0">Information</a></li>
                 <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations</a></li>
                 <li data-menuanchor="secondPage" ><a href="#secondPage" onclick="this.blur();" style="outline:0">Fire categories</a></li>
-                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalion stats</a></li>
-                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Incident numbers</a></li>
-                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean m per s </a></li>
-                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean response time </a></li>
-                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">K-means</a></li>
-                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Multiple regression</a></li>
-                <li data-menuanchor="ninthPage"><a href="#ninethPage" onclick="this.blur();">Decision trees</a></li>
+                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalion</a></li>
+                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Fire Incidents</a></li>
+                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean response time</a></li>
+                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean meters per second</a></li>
+                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">Multiple regression</a></li>
+                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Decision trees</a></li>
+                <li data-menuanchor="ninthPage"><a href="#ninethPage" onclick="this.blur();">K-Means</a></li>
             </ul>
             </div>
         </div>
@@ -105,6 +105,7 @@
         <div class="section">
             <div class="container" data-anchor="secondPage" id="page2">
                 <div class="btn-group" data-toggle="buttons">
+                    <p>The total number of fire categories is 176, we will only plot the top 30 categories. In this plot it is very clear that the most number of categories are related to false alarms, six out of the top ten categories. This is not very interesting and we will therefore look into the categories directly linked to fire. Five of these fire categories made it to the top 30 overall categories, which means, as expected, that there are far more false alarms than there are actual fires.</p>
                     <label class="btn btn-default active" onclick="switchBarChartDataCat('all')" style="outline:0">
                         <input value="Year" type="radio" checked="" >All 
                     </label>
@@ -142,31 +143,10 @@
         <div class="section">
             <div class="container" data-anchor="fifthPage" id="page5">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
-                        <input value="Year" type="radio" checked="" >Battalions
-                    </label>
-                    <label class="btn btn-default" onclick="switchBarChartDataMm('firestation')" style="outline:0">
-                        <input value="Year" type="radio" >Fire stations
-                    </label>
-                    <label class="btn btn-default" onclick="switchBarChartDataMm('year')" style="outline:0">
-                        <input value="Year" type="radio" checked="" >Year
-                    </label>
-                    <label class="btn btn-default" onclick="switchBarChartDataMm('month')" style="outline:0">
-                        <input value="Year" type="radio" >Month
-                    </label>
-                    <label class="btn btn-default" onclick="switchBarChartDataMm('weekday')" style="outline:0">
-                        <input value="Year" type="radio" >Day
-                    </label>
-                    <label class="btn btn-default" onclick="switchBarChartDataMm('hour')" style="outline:0">
-                        <input value="Year" type="radio" >Hour
-                    </label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <div class="container" data-anchor="sixthPage" id="page6">
-                <div class="btn-group" data-toggle="buttons">
+                    <p><strong>We will now look at the mean response time for different attributes and try to see if there are any seasonal or other trends in the data. This will be helpful further down the road when we will try to predict the response time using multiple regression.
+
+The data in these 6 plots is not very encouraging. There seems to be no obvious trends in the plots, except for sudden spike in response time from the year 2007 and onward, but that is likely related to inefficient data from the previous years.
+</strong></p>
                     <label class="btn btn-default active" onclick="switchBarChartDataMrt('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions
                     </label>
@@ -190,7 +170,45 @@
         </div>
         
         <div class="section">
+            <div class="container" data-anchor="sixthPage" id="page6">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Battalions
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('firestation')" style="outline:0">
+                        <input value="Year" type="radio" >Fire stations
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('year')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Year
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('month')" style="outline:0">
+                        <input value="Year" type="radio" >Month
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('weekday')" style="outline:0">
+                        <input value="Year" type="radio" >Day
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('hour')" style="outline:0">
+                        <input value="Year" type="radio" >Hour
+                    </label>
+                </div>
+            </div>
+        </div>   
+
+        
+        <div class="section">
             <div class="container" data-anchor="seventhPage" id="page7">
+                
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="eightPage" id="page8">
+
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="ninethPage" id="page9">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
                         <input value="Year" type="radio" checked="" >K2
@@ -209,18 +227,6 @@
                     </label>
                 </div>
                 <p style="font-size:14px">Click on map to zoom in</p>
-            </div>
-        </div>
-        
-        <div class="section">
-            <div class="container" data-anchor="eighthPage" id="page8">
-
-            </div>
-        </div>
-        
-        <div class="section">
-            <div class="container" data-anchor="ninethPage" id="page9">
-
             </div>
         </div>
     </div>
