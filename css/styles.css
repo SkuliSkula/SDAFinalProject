@@ -74,10 +74,19 @@ p{
 }
 
 #page4 {
-    background-color: #cccccc;
     background: rgba(0,0,0,0);
     outline: none;
     box-shadow: none;
+}
+
+#page5 {
+    background: rgba(0,0,0,0);
+    outline: none;
+    box-shadow: none;
+}
+
+#page6 {
+    background-color: #cccccc;
 }
 
 .borough {
@@ -280,6 +289,46 @@ p{
 
 .geokmeans {
     fill: none;
-    stroke: white;
-    stroke-width: 2;
+    stroke: #000;
+    stroke-width: 3;
+}
+
+/*************************** Styles for box plot *********/
+
+.box {
+  font: 10px sans-serif;
+}
+
+.box line,
+.box rect,
+.box circle {
+  fill: rgba(31,119,180,0.8);
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.box .center {
+  stroke-dasharray: 3,3;
+}
+
+.box .outlier {
+  fill: none;
+  stroke: #000;
+}
+
+.axis {
+  font: 12px sans-serif;
+}
+ 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ 
+.x.axis.bp path { 
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }

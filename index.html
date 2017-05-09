@@ -33,6 +33,7 @@
     <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/bubble-chart.js"></script>
     <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/central-click/central-click.js"></script>
     <script src="https://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/lines/lines.js"></script>
+    <script src="scripts/box.js"></script>
 </head>
 
 <body id="main">
@@ -53,6 +54,8 @@
                 <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Battalion stats</a></li>
                 <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Incident numbers</a></li>
                 <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">K-means</a></li>
+                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Multiple regression</a></li>
+                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Decision trees</a></li>
             </ul>
             </div>
         </div>
@@ -79,7 +82,7 @@
             <div class="container" data-anchor="firstPage" id="page1">
                 <h1>Fire stations locations</h1>
                 <p><strong>San Francisco has <span style="color:red">44 fire stations.</span> Which are divided into <span style="color:red">10 battalions.</span></strong></p>
-                <p style="font-size:14px">Click to zoom in</p>
+                <p style="font-size:14px">Click on map to zoom in</p>
                 <!--<ul class="battalions">
                     <li>Battalion 1</li>
                     <li>Battalion 2</li>
@@ -139,6 +142,19 @@
                         <input value="Year" type="radio" >K6
                     </label>
                 </div>
+                <p style="font-size:14px">Click on map to zoom in</p>
+            </div>
+        </div>
+    
+        <div class="section">
+            <div class="container" data-anchor="fifthPage" id="page5">
+
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="sixthPage" id="page6">
+
             </div>
         </div>
     </div>
@@ -160,10 +176,10 @@
         $(document).ready(function() {
             // Load fullpage settings
             $('#fullpage').fullpage({
-                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
+                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'K-means'],
+                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'K-means', 'Multiple regression', 'Decision trees'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,
@@ -180,8 +196,12 @@
                         reset();
                     }
                     
-                    else if(index == 3 && direction == 'down') {
+                    else if(index == 5 && direction == 'down') {
+                        resetK();
+                    }
                     
+                    else if(index == 5 && direction == 'up') {
+                        resetK();
                     }
                 }
                 
@@ -195,6 +215,10 @@
             loadBubbleChartData();
             // Load the k-means map
             loadKMeansMap();
+            // Load Multiple Regression
+            loadRegressionData();
+            // Load Decision Tree
+            //loadDecisionTreeData();
         });
     
     </script>
@@ -203,6 +227,7 @@
     <script src="scripts/bar-stats.js"></script>
     <script src="scripts/bubble-chart.js"></script>
     <script src="scripts/k-means.js"></script>
+    <script src="scripts/box-plot.js"></script>
 </body>
 
 </html>
