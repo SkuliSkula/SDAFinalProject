@@ -29,7 +29,8 @@ var mrSvg, dtSvg;
 var labels = true;
 
 function loadRegressionData() {
-    d3.csv("https://gist.githubusercontent.com/SkuliSkula/dbea0e7641b1258025ff4c5d134716bd/raw/fffc52a5abe47c76490ccc11f3129031d6ec9fd9/multiple_regression_performance.csv", function(error, csv) {
+    var counter = 0;
+    d3.csv("https://gist.githubusercontent.com/SkuliSkula/dbea0e7641b1258025ff4c5d134716bd/raw/98456dba8edf508af5e711214d100a730a0734bb/multiple_regression_performance.csv", function(error, csv) {
         if (error) throw error;
 
         regressionData[0] = [];
@@ -50,7 +51,7 @@ function loadRegressionData() {
             
             regressionData[0][1].push(mr);
 		    regressionData[1][1].push(mv);
-            
+
             if (rowMax > maxMr) maxMr = rowMax;
 		    if (rowMin < minMr) minMr = rowMin;	
         });
@@ -82,7 +83,8 @@ function loadDecisionTreeData() {
             
             decisionTreeData[0][1].push(dt);
 		    decisionTreeData[1][1].push(lc);
-            
+            console.log("rowMax: " +rowMaxDt);
+            console.log("rowMin: " +rowMinDt);
             if (rowMaxDt > maxDt) maxDt = rowMaxDt;
 		    if (rowMinDt < minDt) minDt = rowMinDt;	
         });
@@ -132,7 +134,7 @@ function initRegressionBoxPlot() {
         .attr("text-anchor", "middle")  
         .style("font-size", "18px") 
         //.style("text-decoration", "underline")  
-        .text("Multiple Regression");
+        .text("Multiple regression vs. the mean response time");
     
 	 // draw y axis
 	mrSvg.append("g")
@@ -185,7 +187,7 @@ function initDecisionTreeBoxPlot() {
         .attr("text-anchor", "middle")  
         .style("font-size", "18px") 
         //.style("text-decoration", "underline")  
-        .text("Decision trees");
+        .text("Decision tree vs. the largest class");
     
 	 // draw y axis
 	dtSvg.append("g")

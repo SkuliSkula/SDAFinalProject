@@ -54,10 +54,10 @@
                 <li data-menuanchor="secondPage" ><a href="#secondPage" onclick="this.blur();" style="outline:0">Fire categories</a></li>
                 <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalion</a></li>
                 <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Fire Incidents</a></li>
-                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean response time</a></li>
-                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean meters per second</a></li>
-                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">Multiple regression</a></li>
-                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Decision trees</a></li>
+                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean Response Time</a></li>
+                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean m/s</a></li>
+                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">Multiple Regression</a></li>
+                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Decision Tree</a></li>
                 <li data-menuanchor="ninthPage"><a href="#ninethPage" onclick="this.blur();">K-Means</a></li>
             </ul>
             </div>
@@ -72,8 +72,8 @@
         <!-- Begin pages -->
         <div class="section">
             <div class="container" data-anchor="Home" id="homePage">
-                <h1>San Francisco and it´ s <span style="color:red">firefighters</span></h1>
-                <p><a href="https://github.com/adalstef/social_data_final_project/blob/master/SFFD_fire_incidents.ipynb" target="_blank">Link to the iPython notebook </a><strong> </strong></p>
+                <h1>SFFD - Fire Incidents</h1>
+                <p><a href="http://nbviewer.jupyter.org/github/adalstef/social_data_final_project/blob/master/SFFD_fire_incidents.ipynb" target="_blank">Link to the iPython notebook </a><strong> </strong></p>
                 <p><a href="https://data.sfgov.org/Public-Safety/Fire-Incidents/wr8u-xric" target="_blank">Link to the dataset</a><strong> </strong></p>
                 <p><strong>One of the most important aspects of every fire department is the response time, or how quickly a fire department is at arriving on a scene. Every second can be critical. San Francisco's Open Data project has made it possible to find out these response times.</strong></p>
                 <p><strong>The dataset consist of approx. 430.000 incidents (rows) from 2003, with 63 attributes (columns). Some of the attributes are more helpful than others in determining the response time, and it will be interesting to see if it is possible to predict the response time given some of the attributes.
@@ -159,7 +159,7 @@
         
         <div class="section">
             <div class="container" data-anchor="sixthPage" id="page6">
-                <p><strong>In order to get meters per seconds, we divide the distance from a fire station to the fire incident location with the response time. The following six plots there are most spikes for the attributes hour, year, month, weekday and different fire stations. We will use these attributes for our multiple regression model, but with a slightly tweaked version of the meters per seconds. The plan is to calculate the mean m/s for each fire station for each hour. So each fire station has 24 data points of mean m/s.</strong></p>
+                <p><strong>In order to get meters per seconds, we divide the distance from a fire station to the fire incident location with the response time. In the following six plots there are most spikes for the attributes hour, year, month, weekday and different fire stations. We will use these attributes for our multiple regression model, but with a slightly tweaked version of the meters per seconds. The plan is to calculate the mean m/s for each fire station for each hour. So each fire station has 24 data points of mean m/s.</strong></p>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions

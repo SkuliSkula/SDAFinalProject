@@ -111,7 +111,7 @@ function replayMm(data) {
     slices.forEach(function(slice, index){
         setTimeout(function(){
             drawMm(slice);
-        }, index * 300);
+        }, index * 100);
     });
 }
 
@@ -140,10 +140,10 @@ function drawMm(data) {
     yMm.domain([0, d3.max(getNumForScalingMm(data), function(d) {
       return d; })]);
 
-    svgMm.select('.x.axis').transition().duration(300).call(xAxisMm);
+    svgMm.select('.x.axis').transition().duration(100).call(xAxisMm);
 
     // same for yAxis but with more transform and a title
-    svgMm.select(".y.axis").transition().duration(300).call(yAxisMm)
+    svgMm.select(".y.axis").transition().duration(100).call(yAxisMm)
 
     tipBarMm = d3.tip().attr('class', 'd3-tip')
     .offset([-10, 0])

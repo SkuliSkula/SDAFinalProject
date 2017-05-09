@@ -70,7 +70,7 @@ function replayCat(data) {
     slices.forEach(function(slice, index){
         setTimeout(function(){
             drawCat(slice);
-        }, index * 300);
+        }, index * 100);
     });
 }
 
@@ -88,10 +88,10 @@ function drawCat(data) {
     yCat.domain([0, d3.max(getIncidentsNumForScalingCat(data), function(d) {
       return d; })]);
 
-    svgCat.select('.x.axis').transition().duration(300).call(xAxisCat);
+    svgCat.select('.x.axis').transition().duration(100).call(xAxisCat);
 
     // same for yAxis but with more transform and a title
-    svgCat.select(".y.axis").transition().duration(300).call(yAxisCat)
+    svgCat.select(".y.axis").transition().duration(100).call(yAxisCat)
 
     tipBarBs = d3.tip().attr('class', 'd3-tip')
     .offset([-10, 0])
