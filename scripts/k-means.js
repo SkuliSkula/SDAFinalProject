@@ -28,7 +28,7 @@ function loadKMeansMap() {
 }
 
 function initKMap(data) {
-    map = d3.select("#page4").append("svg:svg")
+    map = d3.select("#page6").append("svg:svg")
         .attr("width", width)
         .attr("height", height);
 

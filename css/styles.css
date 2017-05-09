@@ -91,6 +91,18 @@ p{
     box-shadow: none;
 }
 
+#page7 {
+    background: rgba(0,0,0,0);
+    outline: none;
+    box-shadow: none;
+}
+
+#page8 {
+    background: rgba(0,0,0,0);
+    outline: none;
+    box-shadow: none;
+}
+
 .borough {
     fill: black;
 }

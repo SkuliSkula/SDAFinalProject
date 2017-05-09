@@ -14,7 +14,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- D3 -->
-    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.0/topojson.js"></script>
     <!-- Full page for smooth scrolling -->
     <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
@@ -53,9 +53,11 @@
                 <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations locations</a></li>
                 <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Battalion stats</a></li>
                 <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Incident numbers</a></li>
-                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">K-means</a></li>
-                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Multiple regression</a></li>
-                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Decision trees</a></li>
+                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Mean m per s </a></li>
+                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean response time </a></li>
+                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">K-means</a></li>
+                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">Multiple regression</a></li>
+                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Decision trees</a></li>
             </ul>
             </div>
         </div>
@@ -126,6 +128,56 @@
         <div class="section">
             <div class="container" data-anchor="fourthPage" id="page4">
                 <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Battalions
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('firestation')" style="outline:0">
+                        <input value="Year" type="radio" >Fire stations
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('year')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Year
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('month')" style="outline:0">
+                        <input value="Year" type="radio" >Month
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('weekday')" style="outline:0">
+                        <input value="Year" type="radio" >Day
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMm('hour')" style="outline:0">
+                        <input value="Year" type="radio" >Hour
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="fifthPage" id="page5">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" onclick="switchBarChartDataMrt('battalion')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Battalions
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMrt('firestation')" style="outline:0">
+                        <input value="Year" type="radio" >Fire stations
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMrt('year')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >Year
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMrt('month')" style="outline:0">
+                        <input value="Year" type="radio" >Month
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMrt('weekday')" style="outline:0">
+                        <input value="Year" type="radio" >Day
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataMrt('hour')" style="outline:0">
+                        <input value="Year" type="radio" >Hour
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="sixthPage" id="page6">
+                <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
                         <input value="Year" type="radio" checked="" >K2
                     </label>
@@ -145,15 +197,15 @@
                 <p style="font-size:14px">Click on map to zoom in</p>
             </div>
         </div>
-    
+        
         <div class="section">
-            <div class="container" data-anchor="fifthPage" id="page5">
+            <div class="container" data-anchor="seventhPage" id="page7">
 
             </div>
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="sixthPage" id="page6">
+            <div class="container" data-anchor="eighthPage" id="page8">
 
             </div>
         </div>
@@ -176,10 +228,10 @@
         $(document).ready(function() {
             // Load fullpage settings
             $('#fullpage').fullpage({
-                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage'],
+                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar', 'K-means', 'Multiple regression', 'Decision trees'],
+                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar incident','Bar mean s', 'Bar mean r', 'K-means', 'Multiple regression', 'Decision trees'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,
@@ -196,11 +248,11 @@
                         reset();
                     }
                     
-                    else if(index == 5 && direction == 'down') {
+                    else if(index == 6 && direction == 'down') {
                         resetK();
                     }
                     
-                    else if(index == 5 && direction == 'up') {
+                    else if(index == 6 && direction == 'up') {
                         resetK();
                     }
                 }
@@ -211,6 +263,10 @@
             loadMap();
             // Load bar chart
             loadBarChartData();
+            // Load mean m per s bar chart
+            loadBarChartDataMm();
+            // Load Mean response time
+            loadBarChartDataMrt()
             // Load the bubble chart
             loadBubbleChartData();
             // Load the k-means map
@@ -228,6 +284,8 @@
     <script src="scripts/bubble-chart.js"></script>
     <script src="scripts/k-means.js"></script>
     <script src="scripts/box-plot.js"></script>
+    <script src="scripts/mean-response-time.js"></script>
+    <script src="scripts/mean-m-per-s.js"></script>
 </body>
 
 </html>

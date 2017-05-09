@@ -1,6 +1,6 @@
 var marginMr = {top: 10, right: 50, bottom: 20, left: 50},
-    widthMr = $("#page5").width() - marginMr.left - marginMr.right,
-    heightMr = $("#page5").height() - marginMr.top - marginMr.bottom;
+    widthMr = $("#page7").width() - marginMr.left - marginMr.right,
+    heightMr = $("#page7").height() - marginMr.top - marginMr.bottom;
 
 var minMr = Infinity,
     maxMr = -Infinity;
@@ -51,8 +51,6 @@ function loadRegressionData() {
             
             var rowMax = Math.max(mr,mv);
             var rowMin = Math.min(mr,mv);
-            console.log("rowMax: ", rowMax);
-            console.log("rowMin: ", rowMin);
             
             regressionData[0][1].push(mr);
 		    regressionData[1][1].push(mv);
@@ -105,7 +103,7 @@ function loadDecisionTreeData() {
 
 function initRegressionBoxPlot() {
 
-    mrSvg = d3.select("#page5").append("svg")
+    mrSvg = d3.select("#page7").append("svg")
         .attr("class", "box")
         .attr("width", widthMr + marginMr.left + marginMr.right)
         .attr("height", heightMr + marginMr.bottom + marginMr.top)
@@ -114,7 +112,7 @@ function initRegressionBoxPlot() {
     
     // create x-Axis
 	var xMr = d3.scale.ordinal()	   
-		.domain( regressionData.map(function(d) { console.log(d); return d[0] }))	 
+		.domain( regressionData.map(function(d) { return d[0] }))	 
 		.rangeRoundBands([0 , widthMr], 0.7, 0.3);
     
 	var xAxisMr = d3.svg.axis()
@@ -159,7 +157,7 @@ function initRegressionBoxPlot() {
 }
 
 function initDecisionTreeBoxPlot() {
-    dtSvg = d3.select("#page6").append("svg")
+    dtSvg = d3.select("#page8").append("svg")
         .attr("class", "box")
         .attr("width", widthMr + marginMr.left + marginMr.right)
         .attr("height", heightMr + marginMr.bottom + marginMr.top)
@@ -167,7 +165,7 @@ function initDecisionTreeBoxPlot() {
         .attr("transform", "translate(" + marginMr.left + "," + marginMr.top + ")");
     
     var xDt = d3.scale.ordinal()	   
-    .domain( decisionTreeData.map(function(d) { console.log(d); return d[0] }))	 
+    .domain( decisionTreeData.map(function(d) { return d[0] }))	 
     .rangeRoundBands([0 , widthMr], 0.7, 0.3);
     
 	var xAxisDt = d3.svg.axis()
