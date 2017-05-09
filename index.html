@@ -86,18 +86,6 @@
             <div class="container" data-anchor="firstPage" id="page1">
                 <h1>Fire stations</h1>
                 <p><strong>San Francisco Fire Department (SFFD) has 45 fire stations located across San Francisco and they are further divided into 10 battalions. Size of a battalion ranges from 4 to 7 fire stations. Fire stations close to each other belong in the same battalion. You can some zoom in on the map by clicking on different regions in San Francisco.</strong></p>
-                <!--<ul class="battalions">
-                    <li>Battalion 1</li>
-                    <li>Battalion 2</li>
-                    <li>Battalion 3</li>
-                    <li>Battalion 4</li>
-                    <li>Battalion 5</li>
-                    <li>Battalion 6</li>
-                    <li>Battalion 7</li>
-                    <li>Battalion 8</li>
-                    <li>Battalion 9</li>
-                    <li>Battalion 10</li>
-                </ul>-->
             </div>
             
         </div>
@@ -145,8 +133,8 @@
                 <div class="btn-group" data-toggle="buttons">
                     <p><strong>We will now look at the mean response time for different attributes and try to see if there are any seasonal or other trends in the data. This will be helpful further down the road when we will try to predict the response time using multiple regression.
 
-The data in these 6 plots is not very encouraging. There seems to be no obvious trends in the plots, except for sudden spike in response time from the year 2007 and onward, but that is likely related to inefficient data from the previous years.
-</strong></p>
+                        The data in these 6 plots is not very encouraging. There seems to be no obvious trends in the plots, except for sudden spike in response time from the year 2007 and onward, but that is likely related to inefficient data from the previous years.
+                        </strong></p>
                     <label class="btn btn-default active" onclick="switchBarChartDataMrt('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions
                     </label>
@@ -171,6 +159,7 @@ The data in these 6 plots is not very encouraging. There seems to be no obvious 
         
         <div class="section">
             <div class="container" data-anchor="sixthPage" id="page6">
+                <p><strong>In order to get meters per seconds, we divide the distance from a fire station to the fire incident location with the response time. The following six plots there are most spikes for the attributes hour, year, month, weekday and different fire stations. We will use these attributes for our multiple regression model, but with a slightly tweaked version of the meters per seconds. The plan is to calculate the mean m/s for each fire station for each hour. So each fire station has 24 data points of mean m/s.</strong></p>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions
@@ -197,18 +186,29 @@ The data in these 6 plots is not very encouraging. There seems to be no obvious 
         
         <div class="section">
             <div class="container" data-anchor="seventhPage" id="page7">
-                
+                <p><strong>The model was trained on the attributes year, month, weekday, distance, fire station mean m/s per hour (which are normalized in the range [0,1]) and response_time, using cross-validation.
+
+                    334.437 observations are divided into 10 training and test samples, and compared with the mean response time of the observations. Each datapoint generated from the model is subtracted from the real value. The mean value is then calculated from all of the absolute value datapoints in the subset, which gives the mean score for each subset (total of 10).
+
+                    Multiple regression outperforms the mean response time in all of the 10 tests, by a margin approx. 10 seconds. The boxplots show the distribution of the mean values generated from the cross-validation. This is still though far off from the right value, or about 1 minute and 30 seconds. This is what somewhat expected as there were no clear trends in the data when the attributes were plotted.
+                    </strong></p>
             </div>
         </div>
         
         <div class="section">
             <div class="container" data-anchor="eightPage" id="page8">
+                <p><strong>Decision tree is used to predict the battalion (the area) which fire category at a certain time is likely to happen in. The attributes which will be used are fire category, part of the day and battalion.
 
+                    The same method of cross-validation will be used as for multiple regression, except now we are calculating the misclassification rate. The decision tree either predicts the right battalion or the wrong. The decision tree will be compared with a simple model, which always predicts the largest class (B02).
+
+                    Decision tree outperforms the simple largest class model in every ten of the test subsets with a margin around 4%. This is still though, a very high misclassification rate by the model, around 76% are wrong predictions.
+                    </strong></p>
             </div>
         </div>
         
         <div class="section">
             <div class="container" data-anchor="ninethPage" id="page9">
+                <p><strong>We will use this classifier to identify clusters in building fires by training models of K = 2, ..., 6. The cluster centers and the labels that belong to them can been seen by clicking the buttons. You can some zoom in on the map by clicking on different regions in San Francisco.</strong></p>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
                         <input value="Year" type="radio" checked="" >K2
@@ -226,7 +226,6 @@ The data in these 6 plots is not very encouraging. There seems to be no obvious 
                         <input value="Year" type="radio" >K6
                     </label>
                 </div>
-                <p style="font-size:14px">Click on map to zoom in</p>
             </div>
         </div>
     </div>
@@ -251,7 +250,7 @@ The data in these 6 plots is not very encouraging. There seems to be no obvious 
                 anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage', 'ninethPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Information', 'Fire stations', 'Fire categories', 'Bubble', 'Bar incident','Bar mean s', 'Bar mean r', 'K-means', 'Multiple regression', 'Decision trees'],
+                navigationTooltips: ['Information', 'Fire stations', 'Fire categories', 'Battalion', 'Fire incidents','Mean response time', 'Mean m/s', 'Multiple regression', 'Decision trees', 'k-means'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,

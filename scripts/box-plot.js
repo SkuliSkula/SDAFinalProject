@@ -1,7 +1,13 @@
 var marginMr = {top: 10, right: 50, bottom: 20, left: 50},
     widthMr = $("#page7").width() - marginMr.left - marginMr.right,
-    heightMr = $("#page7").height() - marginMr.top - marginMr.bottom;
+    heightMr = 400 - marginMr.top - marginMr.bottom;
 
+var marginDt = {top: 10, right: 50, bottom: 20, left: 50},
+    widthDt = $("#page7").width() - marginDt.left - marginDt.right,
+    heightDt = 400 - marginDt.top - marginDt.bottom;
+
+var minDt = Infinity,
+    maxDt = - Infinity;
 var minMr = Infinity,
     maxMr = -Infinity;
 
@@ -13,34 +19,24 @@ var chartMr = d3.box()
 
 var chartDt = d3.box()
     .whiskers(iqr(1.5))
-    .width(widthMr)
-    .height(heightMr)
+    .width(widthDt)
+    .height(heightDt)
     .showLabels(labels);
 
 var regressionData = [];
 var decisionTreeData = [];
 var mrSvg, dtSvg;
-var labels = true; // show the text labels beside individual boxplots?
+var labels = true;
 
 function loadRegressionData() {
     d3.csv("https://gist.githubusercontent.com/SkuliSkula/dbea0e7641b1258025ff4c5d134716bd/raw/fffc52a5abe47c76490ccc11f3129031d6ec9fd9/multiple_regression_performance.csv", function(error, csv) {
         if (error) throw error;
-        // using an array of arrays with
-        // data[n][2] 
-        // where n = number of columns in the csv file 
-        // data[i][0] = name of the ith column
-        // data[i][1] = array of values of ith column
 
-        
         regressionData[0] = [];
         regressionData[1] = [];
 
-        // add more rows if your csv file has more columns
-
-        // add here the header of the csv file
         regressionData[0][0] = "multiple_regression";
         regressionData[1][0] = "mean_value";
-        // add more rows if your csv file has more columns
 
         regressionData[0][1] = [];
         regressionData[1][1] = [];    
@@ -67,11 +63,6 @@ function loadRegressionData() {
 function loadDecisionTreeData() {
     d3.csv("https://gist.githubusercontent.com/SkuliSkula/dbea0e7641b1258025ff4c5d134716bd/raw/fffc52a5abe47c76490ccc11f3129031d6ec9fd9/decision_tree_performance.csv", function(error, csv) {
         if (error) throw error;
-        // using an array of arrays with
-        // data[n][2] 
-        // where n = number of columns in the csv file 
-        // data[i][0] = name of the ith column
-        // data[i][1] = array of values of ith column
 
         decisionTreeData[0] = [];
         decisionTreeData[1] = [];
@@ -92,11 +83,11 @@ function loadDecisionTreeData() {
             decisionTreeData[0][1].push(dt);
 		    decisionTreeData[1][1].push(lc);
             
-            if (rowMaxDt > maxMr) maxMr = rowMaxDt;
-		    if (rowMinDt < minMr) minMr = rowMinDt;	
+            if (rowMaxDt > maxDt) maxDt = rowMaxDt;
+		    if (rowMinDt < minDt) minDt = rowMinDt;	
         });
 
-        chartDt.domain([minMr, maxMr]);
+        chartDt.domain([minDt, maxDt]);
         initDecisionTreeBoxPlot();
     });
 }
@@ -145,7 +136,7 @@ function initRegressionBoxPlot() {
     
 	 // draw y axis
 	mrSvg.append("g")
-        .attr("class", "y axis bp")
+        .attr("class", "y axis")
         .call(yAxisMr)
 		.append("text") // and text1
 		  .attr("transform", "rotate(-90)")
@@ -159,22 +150,22 @@ function initRegressionBoxPlot() {
 function initDecisionTreeBoxPlot() {
     dtSvg = d3.select("#page8").append("svg")
         .attr("class", "box")
-        .attr("width", widthMr + marginMr.left + marginMr.right)
-        .attr("height", heightMr + marginMr.bottom + marginMr.top)
+        .attr("width", widthDt + marginDt.left + marginDt.right)
+        .attr("height", heightDt + marginDt.bottom + marginDt.top)
         .append("g")
-        .attr("transform", "translate(" + marginMr.left + "," + marginMr.top + ")");
+        .attr("transform", "translate(" + marginDt.left + "," + marginDt.top + ")");
     
     var xDt = d3.scale.ordinal()	   
     .domain( decisionTreeData.map(function(d) { return d[0] }))	 
-    .rangeRoundBands([0 , widthMr], 0.7, 0.3);
+    .rangeRoundBands([0 , widthDt], 0.7, 0.3);
     
 	var xAxisDt = d3.svg.axis()
 		.scale(xDt)
 		.orient("bottom");
 	// the y-axis
 	var yDt = d3.scale.linear()
-		.domain([minMr, maxMr])
-		.range([heightMr + marginMr.top, 0 + marginMr.top]);
+		.domain([minDt, maxDt])
+		.range([heightDt + marginDt.top, 0 + marginDt.top]);
 	
 	var yAxisDt = d3.svg.axis()
     .scale(yDt)
@@ -184,13 +175,13 @@ function initDecisionTreeBoxPlot() {
 	dtSvg.selectAll(".box")	   
       .data(decisionTreeData)
 	  .enter().append("g")
-		.attr("transform", function(d) { return "translate(" +  xDt(d[0])  + "," + marginMr.top + ")"; } )
+		.attr("transform", function(d) { return "translate(" +  xDt(d[0])  + "," + marginDt.top + ")"; } )
       .call(chartDt.width(xDt.rangeBand()));
 
     // add a title
 	dtSvg.append("text")
-        .attr("x", (widthMr / 2))             
-        .attr("y", 0 + (marginMr.top / 2))
+        .attr("x", (widthDt / 2))             
+        .attr("y", 0 + (marginDt.top / 2))
         .attr("text-anchor", "middle")  
         .style("font-size", "18px") 
         //.style("text-decoration", "underline")  
@@ -198,7 +189,7 @@ function initDecisionTreeBoxPlot() {
     
 	 // draw y axis
 	dtSvg.append("g")
-        .attr("class", "y axis bp")
+        .attr("class", "y axis")
         .call(yAxisDt)
 		.append("text") // and text1
 		  .attr("transform", "rotate(-90)")
