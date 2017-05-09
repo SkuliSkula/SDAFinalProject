@@ -48,11 +48,12 @@ p{
 #homePage {
     text-align: center;
     vertical-align: middle;
-    background: #fff;
+    background: rgba(0,0,0,0.1);
     /*outline: none;
     box-shadow: none;*/
     font-size: 18px;
-    color: #000
+    font-weight: bolder;
+    color: #000;
 }
 
 #page1 {
