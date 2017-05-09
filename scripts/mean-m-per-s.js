@@ -96,7 +96,7 @@ function initMmBarChart() {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("M/S");
+      .text("m/s");
 }
 
 function replayMm(data) {
