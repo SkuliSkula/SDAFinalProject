@@ -83,8 +83,7 @@ function loadDecisionTreeData() {
             
             decisionTreeData[0][1].push(dt);
 		    decisionTreeData[1][1].push(lc);
-            console.log("rowMax: " +rowMaxDt);
-            console.log("rowMin: " +rowMinDt);
+
             if (rowMaxDt > maxDt) maxDt = rowMaxDt;
 		    if (rowMinDt < minDt) minDt = rowMinDt;	
         });

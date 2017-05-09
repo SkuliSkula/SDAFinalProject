@@ -122,7 +122,7 @@ function getNumForScalingMm(data) {
 }
 
 function drawMm(data) {
-
+    console.log(data);
     xMm.domain(data.map(function(d) {
       if(d.year)
           return d.year;
@@ -165,8 +165,8 @@ function drawMm(data) {
           return d.hour; 
       else if(d.fire_station)
           return d.fire_station;
-      else if(d.hour)
-          return d.hour;
+      else if(d.year)
+          return d.year;
     }).on('mouseover', tipBarMm.show)
       .on('mouseout', tipBarMm.hide);
 
@@ -189,6 +189,7 @@ function drawMm(data) {
     barsMm.transition()
       .duration(300)
       .attr("x", function(d) {
+        console.log(d.year)
         if(d.year)
             return xMm(d.year);
       else if(d.month)

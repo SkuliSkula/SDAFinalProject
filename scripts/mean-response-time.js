@@ -165,8 +165,8 @@ function drawMrt(data) {
           return d.hour; 
       else if(d.fire_station)
           return d.fire_station;
-      else if(d.hour)
-          return d.hour;
+      else if(d.year)
+          return d.year;
     }).on('mouseover', tipBarMrt.show)
       .on('mouseout', tipBarMrt.hide);
 
