@@ -49,15 +49,16 @@
         </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav" id="menu">
-                <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();" style="outline:0">Home</a></li>
-                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations locations</a></li>
-                <li data-menuanchor="secondPage"><a href="#secondPage" onclick="this.blur();">Battalion stats</a></li>
-                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Incident numbers</a></li>
-                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Mean m per s </a></li>
-                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean response time </a></li>
-                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">K-means</a></li>
-                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">Multiple regression</a></li>
-                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Decision trees</a></li>
+                <li data-menuanchor="Home" class="active"><a href="#Home" onclick="this.blur();" style="outline:0">Information</a></li>
+                <li data-menuanchor="firstPage" ><a href="#firstPage" onclick="this.blur();" style="outline:0">Fire stations</a></li>
+                <li data-menuanchor="secondPage" ><a href="#secondPage" onclick="this.blur();" style="outline:0">Fire categories</a></li>
+                <li data-menuanchor="thirdPage"><a href="#thirdPage" onclick="this.blur();">Battalion stats</a></li>
+                <li data-menuanchor="fourthPage"><a href="#fourthPage" onclick="this.blur();">Incident numbers</a></li>
+                <li data-menuanchor="fifthPage"><a href="#fifthPage" onclick="this.blur();">Mean m per s </a></li>
+                <li data-menuanchor="sixthPage"><a href="#sixthPage" onclick="this.blur();">Mean response time </a></li>
+                <li data-menuanchor="seventhPage"><a href="#seventhPage" onclick="this.blur();">K-means</a></li>
+                <li data-menuanchor="eighthPage"><a href="#eighthPage" onclick="this.blur();">Multiple regression</a></li>
+                <li data-menuanchor="ninthPage"><a href="#ninethPage" onclick="this.blur();">Decision trees</a></li>
             </ul>
             </div>
         </div>
@@ -72,19 +73,19 @@
         <div class="section">
             <div class="container" data-anchor="Home" id="homePage">
                 <h1>San Francisco and it´ s <span style="color:red">firefighters</span></h1>
-                <p><strong>The dataset consists of all <span style="color:red">fire incidents</span> (non-medical) from 2003 to 2016 in San Francisco </strong></p>
-                <p><strong>Total size: 152,7MB, <span style="color:red">428,343</span> rows and 63 columns. <a href="#" target="_blank">Link to dataset</a></strong></p>
-                <p><strong>Data attributes of interests are <span style="color:red">alarm/call time</span> and <span style="color:red">arrival time.</span>
+                <p><a href="https://github.com/adalstef/social_data_final_project/blob/master/SFFD_fire_incidents.ipynb" target="_blank">Link to the iPython notebook </a><strong> </strong></p>
+                <p><a href="https://data.sfgov.org/Public-Safety/Fire-Incidents/wr8u-xric" target="_blank">Link to the dataset</a><strong> </strong></p>
+                <p><strong>One of the most important aspects of every fire department is the response time, or how quickly a fire department is at arriving on a scene. Every second can be critical. San Francisco's Open Data project has made it possible to find out these response times.</strong></p>
+                <p><strong>The dataset consist of approx. 430.000 incidents (rows) from 2003, with 63 attributes (columns). Some of the attributes are more helpful than others in determining the response time, and it will be interesting to see if it is possible to predict the response time given some of the attributes.
                 </strong></p>
-                <p><strong>Because then it is possible to find out which fire station is the <span style="color:red">quickest</span> to respond at average.</strong></p>
+                <p><strong>The dataset has both timestamps for alarm time and arrival time, which have to be subtracted from each other to get the response time. Approx. 85% incidents have geolocation, which will be very useful as one of the more critical attributes used to predict the response time. Furthermore, each fire incident has fire station attached to it. The distance from the fire station to the incident will also be useful.</strong></p>
             </div>
         </div>
 
         <div class="section">
             <div class="container" data-anchor="firstPage" id="page1">
-                <h1>Fire stations locations</h1>
-                <p><strong>San Francisco has <span style="color:red">44 fire stations.</span> Which are divided into <span style="color:red">10 battalions.</span></strong></p>
-                <p style="font-size:14px">Click on map to zoom in</p>
+                <h1>Fire stations</h1>
+                <p><strong>San Francisco Fire Department (SFFD) has 45 fire stations located across San Francisco and they are further divided into 10 battalions. Size of a battalion ranges from 4 to 7 fire stations. Fire stations close to each other belong in the same battalion. You can some zoom in on the map by clicking on different regions in San Francisco.</strong></p>
                 <!--<ul class="battalions">
                     <li>Battalion 1</li>
                     <li>Battalion 2</li>
@@ -102,12 +103,25 @@
         </div>
         
         <div class="section">
-            <div class="container bubbleChart" data-anchor="secondPage" id="page2">
+            <div class="container" data-anchor="secondPage" id="page2">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" onclick="switchBarChartDataCat('all')" style="outline:0">
+                        <input value="Year" type="radio" checked="" >All 
+                    </label>
+                    <label class="btn btn-default" onclick="switchBarChartDataCat('fire')" style="outline:0">
+                        <input value="Year" type="radio" >Fire
+                    </label>
+                </div>
             </div>
         </div>
 
         <div class="section">
-            <div class="container" data-anchor="thirdPage" id="page3">
+            <div class="container bubbleChart" data-anchor="thirdPage" id="page3">
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="container" data-anchor="fourthPage" id="page4">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default active" onclick="switchBarChartData('year')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Year
@@ -126,7 +140,7 @@
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="fourthPage" id="page4">
+            <div class="container" data-anchor="fifthPage" id="page5">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default active" onclick="switchBarChartDataMm('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions
@@ -151,7 +165,7 @@
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="fifthPage" id="page5">
+            <div class="container" data-anchor="sixthPage" id="page6">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default active" onclick="switchBarChartDataMrt('battalion')" style="outline:0">
                         <input value="Year" type="radio" checked="" >Battalions
@@ -176,7 +190,7 @@
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="sixthPage" id="page6">
+            <div class="container" data-anchor="seventhPage" id="page7">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" onmouseover="showKData('k2')" style="outline:0">
                         <input value="Year" type="radio" checked="" >K2
@@ -199,13 +213,13 @@
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="seventhPage" id="page7">
+            <div class="container" data-anchor="eighthPage" id="page8">
 
             </div>
         </div>
         
         <div class="section">
-            <div class="container" data-anchor="eighthPage" id="page8">
+            <div class="container" data-anchor="ninethPage" id="page9">
 
             </div>
         </div>
@@ -228,10 +242,10 @@
         $(document).ready(function() {
             // Load fullpage settings
             $('#fullpage').fullpage({
-                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage'],
+                anchors: ['Home','firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage', 'ninethPage'],
                 navigation: true,
                 navigationPosition: 'right',
-                navigationTooltips: ['Home', 'Map', 'Bubble', 'Bar incident','Bar mean s', 'Bar mean r', 'K-means', 'Multiple regression', 'Decision trees'],
+                navigationTooltips: ['Information', 'Fire stations', 'Fire categories', 'Bubble', 'Bar incident','Bar mean s', 'Bar mean r', 'K-means', 'Multiple regression', 'Decision trees'],
                 showActiveTooltip: false,
                 menu: '#menu',
                 scrollingSpeed: 2000,
@@ -248,19 +262,14 @@
                         reset();
                     }
                     
-                    else if(index == 6 && direction == 'down') {
-                        resetK();
-                    }
-                    
-                    else if(index == 6 && direction == 'up') {
-                        resetK();
-                    }
                 }
                 
             });
             
             // Load the SanFran Map
             loadMap();
+            // Load categories chart
+            loadBarChartDataCat();
             // Load bar chart
             loadBarChartData();
             // Load mean m per s bar chart
@@ -286,6 +295,7 @@
     <script src="scripts/box-plot.js"></script>
     <script src="scripts/mean-response-time.js"></script>
     <script src="scripts/mean-m-per-s.js"></script>
+    <script src="scripts/categories-bar.js"></script>
 </body>
 
 </html>

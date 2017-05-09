@@ -1,13 +1,10 @@
-
-//var width = $("#barchart").width()- margin.left - margin.right;
-//var height = $("#barchart").height() - 200- margin.top - margin.bottom;
 var years, months, days, hours;
 var margin = {top: 10, right: 10, bottom: 35, left: 45},
-    width = $("#page3").width() - margin.left - margin.right,
+    width = $("#page4").width() - margin.left - margin.right,
     height = 595 - margin.top - margin.bottom;
 var svgBs, yScaleBs, xScaleBs, xBs, yBs, xAxisBs, yAxisBs;
 
-var loadBarChartData =function() {
+function loadBarChartData() {
     // Load Years
     d3.csv("https://gist.githubusercontent.com/SkuliSkula/41b1c03b69a6a7abdd5785a3acfa6545/raw/6f22d722b4e55a381b39c440b0cf75fbb0b59ba2/sffd_year_count.csv", function(error, data){
         if(error) {
@@ -55,7 +52,7 @@ function initBarChart() {
         .scale(yBs)
         .orient("left");
 
-    svgBs = d3.select("#page3").append("svg")
+    svgBs = d3.select("#page4").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -100,7 +97,6 @@ function replay(data) {
 
 function getIncidentsNumForScalingBs(data) {
     return data.map(function(d){
-        console.log(d);
         return +d.incidents_num;
     });
 }
@@ -118,7 +114,6 @@ function draw(data) {
           return d.hour; 
     }));
     yBs.domain([0, d3.max(getIncidentsNumForScalingBs(data), function(d) {
-        console.log(d);
       return d; })]);
 
     svgBs.select('.x.axis').transition().duration(300).call(xAxisBs);
@@ -186,7 +181,6 @@ function draw(data) {
 }
 
 function switchBarChartData(val) {
-    var data = undefined;
     switch(val) {
         case 'year':
             replay(years);

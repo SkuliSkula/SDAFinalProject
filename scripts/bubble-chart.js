@@ -9,7 +9,7 @@ function loadBubbleChartData() {
 }
 
 function initBubbleChart(data) {
-    var h = $("#page2").width();
+    var h = $("#page3").width();
     var bubbleChart = new d3.svg.BubbleChart({
         supportResponsive: true,
         //container: => use @default

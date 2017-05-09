@@ -1,17 +1,17 @@
 // Declare the global variables
 var svgGEO = undefined;
-var w = $("#page4").width();
-var h = $("#page4").height();
+var w = $("#page7").width();
+var h = $("#page7").height();
 var kData = [];
 var kMeansData = {};
 var active = d3.select(null);
-//Define map projection
-var projection = d3.geo.mercator().scale(160000)
+//Define map projectionKm
+var projectionKm = d3.geo.mercator().scale(160000)
     .center([-122.4, 37.76]); // Center the Map in San Francisco
     //.translate([w / 2, h / 2]);
 
-var path = d3.geo.path()
-    .projection(projection);
+var pathKmeans = d3.geo.path()
+    .projection(projectionKm);
                 
 var map, g
 //Load in GeoJSON data
@@ -28,7 +28,7 @@ function loadKMeansMap() {
 }
 
 function initKMap(data) {
-    map = d3.select("#page6").append("svg:svg")
+    map = d3.select("#page7").append("svg:svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -44,7 +44,7 @@ function initKMap(data) {
     svgGEO.selectAll("path")
         .data(data.features)
         .enter().append("path")
-          .attr("d", path)
+          .attr("d", pathKmeans)
           .attr("id", "sanfran")
           .on("click", clickedK);
 }
@@ -77,9 +77,9 @@ function initKData(data) {
         .append("circle")
         .attr("class", "kCircle")
         .attr("cx", function (d) {
-            return projection([d.lon, d.lat])[0];
+            return projectionKm([d.lon, d.lat])[0];
         }).attr("cy", function (d) {
-            return projection([d.lon, d.lat])[1];
+            return projectionKm([d.lon, d.lat])[1];
         }).attr("r", 1.5).attr("fill", function (d, i) {
             if (+d.k2 == 0) return colorKCircle(0);
             else if (d.k2 == 1) return colorKCircle(1);
@@ -105,9 +105,9 @@ function initGeoKMeansCircles(k) {
         .append("circle")
         .attr("class", "geokmeans")
         .attr("cx", function (d) {
-            return projection([d.lon, d.lat])[0];
+            return projectionKm([d.lon, d.lat])[0];
         }).attr("cy", function (d) {
-            return projection([d.lon, d.lat])[1];
+            return projectionKm([d.lon, d.lat])[1];
         }).attr("r", 9);
 }
 // Switch data between different values of k (k=2,3,4,5,6)
@@ -116,9 +116,9 @@ function showKData(k) {
     svgGEO.selectAll("circle")
         .data(kData)
         .attr("cx", function (d) {
-            return projection([d.lon, d.lat])[0];
+            return projectionKm([d.lon, d.lat])[0];
         }).attr("cy", function (d) {
-            return projection([d.lon, d.lat])[1];
+            return projectionKm([d.lon, d.lat])[1];
         }).attr("r", 1.5).attr("fill", function (d, i) {
             if (k == "k2") {
                 if (+d.k2 === 0) return colorKCircle(0);
@@ -171,7 +171,7 @@ function clickedK(d) {
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
 
-  var bounds = path.bounds(d),
+  var bounds = pathKmeans.bounds(d),
       dx = bounds[1][0] - bounds[0][0],
       dy = bounds[1][1] - bounds[0][1],
       x = (bounds[0][0] + bounds[1][0]) / 2,

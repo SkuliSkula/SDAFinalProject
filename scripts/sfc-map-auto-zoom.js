@@ -1,13 +1,13 @@
-var width = $("#page1").width();
-var height = $("#page1").height();
+var widthSfMap = $("#page1").width();
+var heightSfMap = $("#page1").height();
 var active = d3.select(null);
 
-var projection = d3.geo.mercator()
+var projectionSfMap = d3.geo.mercator()
     .scale(160000)
     .center([-122.4, 37.76]);
 
-var path = d3.geo.path()
-    .projection(projection);
+var pathSfMap = d3.geo.path()
+    .projection(projectionSfMap);
 
 var map, g;
 
@@ -34,13 +34,13 @@ function loadFireStationsData() {
 
 function initMap(data) {
     map = d3.select("#page1").append("svg:svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", widthSfMap)
+        .attr("height", heightSfMap);
 
     map.append("rect")
         .attr("class", "background")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", widthSfMap)
+        .attr("height", heightSfMap)
         .on("click", reset);
     
     sanFran = map.append("g")
@@ -49,7 +49,7 @@ function initMap(data) {
     sanFran.selectAll("path")
         .data(data.features)
         .enter().append("path")
-          .attr("d", path)
+          .attr("d", pathSfMap)
           .attr("id", "sanfran")
           .on("click", clicked);
 }
@@ -59,17 +59,17 @@ function clicked(d) {
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
 
-  var bounds = path.bounds(d),
+  var bounds = pathSfMap.bounds(d),
       dx = bounds[1][0] - bounds[0][0],
       dy = bounds[1][1] - bounds[0][1],
       x = (bounds[0][0] + bounds[1][0]) / 2,
       y = (bounds[0][1] + bounds[1][1]) / 2,
-      scale = .5 / Math.max(dx / width, dy / height),
-      translate = [width / 2 - scale * x, height / 2 - scale * y];
+      scale = .5 / Math.max(dx / widthSfMap, dy / heightSfMap),
+      translate = [widthSfMap / 2 - scale * x, heightSfMap / 2 - scale * y];
 
   sanFran.transition()
       .duration(750)
-      .style("stroke-width", 1.5 / scale + "px")
+      .style("stroke-widthSfMap", 1.5 / scale + "px")
       .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
 }
 
@@ -79,7 +79,7 @@ function reset() {
 
   sanFran.transition()
       .duration(750)
-      .style("stroke-width", "1.5px")
+      .style("stroke-widthSfMap", "1.5px")
       .attr("transform", "");
 }
 
@@ -101,10 +101,10 @@ function drawFireStations(data) {
         .append("circle")
         .attr("class", "firestations")
         .attr("cx", function (d) {
-            return projection([d.longitude, d.latitude])[0];
+            return projectionSfMap([d.longitude, d.latitude])[0];
         })
         .attr("cy", function (d) {
-            return projection([d.longitude, d.latitude])[1];
+            return projectionSfMap([d.longitude, d.latitude])[1];
         })
         .attr("r", 3)
         .attr("fill", function(d) {

@@ -1,6 +1,6 @@
 var marginMr = {top: 10, right: 50, bottom: 20, left: 50},
-    widthMr = $("#page7").width() - marginMr.left - marginMr.right,
-    heightMr = $("#page7").height() - marginMr.top - marginMr.bottom;
+    widthMr = $("#page8").width() - marginMr.left - marginMr.right,
+    heightMr = $("#page8").height() - marginMr.top - marginMr.bottom;
 
 var minMr = Infinity,
     maxMr = -Infinity;
@@ -103,7 +103,7 @@ function loadDecisionTreeData() {
 
 function initRegressionBoxPlot() {
 
-    mrSvg = d3.select("#page7").append("svg")
+    mrSvg = d3.select("#page8").append("svg")
         .attr("class", "box")
         .attr("width", widthMr + marginMr.left + marginMr.right)
         .attr("height", heightMr + marginMr.bottom + marginMr.top)
@@ -157,7 +157,7 @@ function initRegressionBoxPlot() {
 }
 
 function initDecisionTreeBoxPlot() {
-    dtSvg = d3.select("#page8").append("svg")
+    dtSvg = d3.select("#page9").append("svg")
         .attr("class", "box")
         .attr("width", widthMr + marginMr.left + marginMr.right)
         .attr("height", heightMr + marginMr.bottom + marginMr.top)
