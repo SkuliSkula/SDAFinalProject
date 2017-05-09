@@ -5,7 +5,13 @@ var marginMr = {top: 10, right: 50, bottom: 20, left: 50},
 var minMr = Infinity,
     maxMr = -Infinity;
 
-var chart = d3.box()
+var chartMr = d3.box()
+    .whiskers(iqr(1.5))
+    .width(widthMr)
+    .height(heightMr)
+    .showLabels(labels);
+
+var chartDt = d3.box()
     .whiskers(iqr(1.5))
     .width(widthMr)
     .height(heightMr)
@@ -55,7 +61,7 @@ function loadRegressionData() {
 		    if (rowMin < minMr) minMr = rowMin;	
         });
 
-        chart.domain([minMr, maxMr]);
+        chartMr.domain([minMr, maxMr]);
         initRegressionBoxPlot();
     });
 }
@@ -79,20 +85,20 @@ function loadDecisionTreeData() {
         decisionTreeData[1][1] = [];    
         
         csv.forEach(function(x) {
-            var dt = Math.floor(x.decision_tree),
-                lc = Math.floor(x.largest_class);
+            var dt = +x.decision_tree,
+                lc = +x.largest_class;
             
-            var rowMax = Math.max(dt,Math.max(lc));
-            var rowMin = Math.min(dt,Math.min(lc));
+            var rowMaxDt = Math.max(dt, lc);
+            var rowMinDt = Math.min(dt, lc);
             
             decisionTreeData[0][1].push(dt);
 		    decisionTreeData[1][1].push(lc);
             
-            if (rowMax > maxMr) maxMr = rowMax;
-		    if (rowMin < minMr) minMr = rowMin;	
+            if (rowMaxDt > maxMr) maxMr = rowMaxDt;
+		    if (rowMinDt < minMr) minMr = rowMinDt;	
         });
 
-        chart.domain([minMr, maxMr]);
+        chartDt.domain([minMr, maxMr]);
         initDecisionTreeBoxPlot();
     });
 }
@@ -128,7 +134,7 @@ function initRegressionBoxPlot() {
       .data(regressionData)
 	  .enter().append("g")
 		.attr("transform", function(d) { return "translate(" +  xMr(d[0])  + "," + marginMr.top + ")"; } )
-      .call(chart.width(xMr.rangeBand()));
+      .call(chartMr.width(xMr.rangeBand()));
 
     // add a title
 	mrSvg.append("text")
@@ -153,17 +159,56 @@ function initRegressionBoxPlot() {
 }
 
 function initDecisionTreeBoxPlot() {
-    var svg = d3.select("#page6").selectAll("svg")
-        .data(decisionTreeData)
-        .enter().append("svg")
+    dtSvg = d3.select("#page6").append("svg")
         .attr("class", "box")
         .attr("width", widthMr + marginMr.left + marginMr.right)
         .attr("height", heightMr + marginMr.bottom + marginMr.top)
         .append("g")
-        .attr("transform", "translate(" + marginMr.left + "," + marginMr.top + ")")
-        .call(chart);
+        .attr("transform", "translate(" + marginMr.left + "," + marginMr.top + ")");
+    
+    var xDt = d3.scale.ordinal()	   
+    .domain( decisionTreeData.map(function(d) { console.log(d); return d[0] }))	 
+    .rangeRoundBands([0 , widthMr], 0.7, 0.3);
+    
+	var xAxisDt = d3.svg.axis()
+		.scale(xDt)
+		.orient("bottom");
+	// the y-axis
+	var yDt = d3.scale.linear()
+		.domain([minMr, maxMr])
+		.range([heightMr + marginMr.top, 0 + marginMr.top]);
+	
+	var yAxisDt = d3.svg.axis()
+    .scale(yDt)
+    .orient("left");
+    
+	// draw the boxplots	
+	dtSvg.selectAll(".box")	   
+      .data(decisionTreeData)
+	  .enter().append("g")
+		.attr("transform", function(d) { return "translate(" +  xDt(d[0])  + "," + marginMr.top + ")"; } )
+      .call(chartDt.width(xDt.rangeBand()));
 
-
+    // add a title
+	dtSvg.append("text")
+        .attr("x", (widthMr / 2))             
+        .attr("y", 0 + (marginMr.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "18px") 
+        //.style("text-decoration", "underline")  
+        .text("Decision trees");
+    
+	 // draw y axis
+	dtSvg.append("g")
+        .attr("class", "y axis bp")
+        .call(yAxisDt)
+		.append("text") // and text1
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .style("font-size", "16px") 
+		  .text("Error rate in seconds");	 
 }
 
 // Returns a function to compute the interquartile range.
